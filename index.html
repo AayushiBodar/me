@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Rose Day 🌹</title>
+
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4); /* romantic pink gradient */
+  overflow-x: hidden;
+}
+
+/* ---------- CARD ---------- */
+.card {
+  background: #fff0f5; /* light pink */
+  max-width: 900px;
+  margin: 70px auto;
+  padding: 40px;
+  border-radius: 22px;
+  box-shadow: 0 20px 40px rgba(255,105,180,0.4); /* pink shadow */
+  text-align: center;
+  transition: transform 0.3s;
+}
+.card:hover { transform: translateY(-5px); }
+
+.card h2 { color: #ff4b6e; }
+.card p { color: #ff6f91; }
+
+/* ---------- BUTTON ---------- */
+button {
+  padding: 14px 26px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4b6e; /* romantic deep pink */
+  color: white;
+  font-size: 1.05rem;
+  cursor: pointer;
+  margin: 5px;
+  box-shadow: 0 5px 15px rgba(255,105,180,0.4);
+  transition: 0.3s;
+}
+button:hover { background: #ff6f91; }
+
+/* ---------- BACK TEXT ---------- */
+.back-text {
+  position: absolute;
+  top: 18px;
+  right: 25px;
+  font-size: 0.95rem;
+  color: #ff4b6e;
+  cursor: pointer;
+  font-weight: 600;
+  z-index: 3000;
+}
+
+/* ---------- ROSE MODAL ---------- */
+#roseModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(255,182,193,0.7); /* soft pink overlay */
+  z-index: 1000;
+}
+#roseBox {
+  background: #fff0f5; /* light pink modal */
+  max-width: 800px;
+  margin: 10vh auto;
+  padding: 40px;
+  border-radius: 22px;
+  position: relative;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(255,105,180,0.4);
+}
+
+/* ---------- FULL SCREEN ---------- */
+#fullScreen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: #ffdee9; /* romantic pink background */
+  z-index: 2000;
+  text-align: center;
+}
+
+#fullScreen img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 85%;
+  background: rgba(255,182,193,0.8); /* soft pink overlay */
+  padding: 25px 30px;
+  border-radius: 20px;
+  color: #900c3f; /* deep pink text */
+  font-size: 1.25rem;
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* ---------- PETALS ---------- */
+.petal {
+  position: fixed;
+  top: -40px;
+  font-size: 22px;
+  animation: fall linear infinite;
+  pointer-events: none;
+  z-index: 4000;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgMusic" src="C:\Users\Ayushi\OneDrive\Desktop\Gaurang\Dhun Song  Saiyaara  Ahaan Panday, Aneet Padda  Mithoon  Arijit Singh - YRF.mp3" loop></audio>
+
+<!-- 🌹 ROSE DAY CARD -->
+<div class="card">
+  <h2>🌹 Rose Day</h2>
+  <p>Just like a rose, our love keeps blooming.</p>
+  <button onclick="openRose()">Click Me 🌹</button>
+</div>
+
+<!-- 🌹 ROSE MODAL -->
+<div id="roseModal">
+  <div id="roseBox">
+    <div class="back-text" onclick="closeRose()">🔙 Back</div>
+    <h3>Gaurang 🌹 Ayushi</h3>
+    <p id="question"></p><br>
+    <button onclick="yesClicked()">Yes 💖</button>
+    <button onclick="alwaysYesClicked()">Always Yes 😌</button>
+  </div>
+</div>
+
+<!-- 🌹 FULL SCREEN -->
+<div id="fullScreen">
+  <div class="back-text" style="color:white;" onclick="closeFullScreen()">🔙 Back</div>
+  <img src="C:\Users\Ayushi\OneDrive\Desktop\Gaurang\rose.png.png" alt="Rose" />
+  <div id="finalQuote" class="overlay"></div>
+</div>
+
+<script>
+let petalInterval;
+const bgMusic = document.getElementById('bgMusic');
+
+/* ---------- TYPEWRITER EFFECT ---------- */
+function typeText(text, id, speed) {
+  const el = document.getElementById(id);
+  el.innerHTML = "";
+  let i = 0;
+  const t = setInterval(() => {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
+      i++;
+    } else clearInterval(t);
+  }, speed);
+}
+
+/* ---------- ROSE DAY LOGIC ---------- */
+function openRose() {
+  document.getElementById('roseModal').style.display = "block";
+  typeText("Baby, are you ready to share your whole life with me?", "question", 45);
+}
+
+function closeRose() {
+  document.getElementById('roseModal').style.display = "none";
+}
+
+function yesClicked() {
+  alert("Do click on ALWAYS YES 😌 because I am yours forever ❤️");
+}
+
+function alwaysYesClicked() {
+  if (confirm("Good 😌💖 Forever starts now!\n\nGo ahead?")) {
+    document.getElementById('roseModal').style.display = "none";
+    document.getElementById('fullScreen').style.display = "block";
+    bgMusic.play();
+    typeText(
+      "To the man who holds my heart, you bring colour and fragrance into my life just like roses 🌹",
+      "finalQuote",
+      35
+    );
+    startPetals();
+  }
+}
+
+function closeFullScreen() {
+  document.getElementById('fullScreen').style.display = "none";
+  bgMusic.pause();
+  bgMusic.currentTime = 0;
+  clearInterval(petalInterval);
+}
+
+/* ---------- PETALS ---------- */
+function startPetals() {
+  petalInterval = setInterval(() => {
+    const p = document.createElement("div");
+    p.className = "petal";
+    p.innerHTML = "🌹";
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (5 + Math.random() * 5) + "s";
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 10000);
+  }, 350);
+}
+</script>
+
+</body>
+</html>
